@@ -1,63 +1,65 @@
-const getPcScore = document.querySelector("cs");
-const getUserScore = document.querySelector("us");
+let getPcScore = document.querySelector("cs");
+let getUserScore = document.querySelector("us");
 
 const rockBtn = document.getElementById("rock");
 const paperBtn = document.getElementById("paper");
 const scissorsBtn = document.getElementById("scissors");
 
+const userShow = document.getElementById("usershow")
+const pcShow = document.getElementById("pcshow")
+
 let userChoice;
 let pcChoice;
 
-paperBtn.addEventListener("click", getPcChoice)
-paperBtn.addEventListener("click", choicePaper)
 
-rockBtn.addEventListener("click", getPcChoice)
-rockBtn.addEventListener("click", choiceRock)
 
-scissorsBtn.addEventListener("click", getPcChoice)
-scissorsBtn.addEventListener("click", choiceScissors)
+let userScore = 0;
+let pcScore = 0;
+
+getPcScore = pcScore;
+console.log(getPcScore)
+
+
+let winner = document.getElementById("winner") 
+
+const btns = document.querySelectorAll(".btns");
+
+btns.forEach(button => button.addEventListener("click", () => {
+    userChoice = button.textContent;
+    getPcChoice();
+    userShow.textContent = userChoice;
+    pcShow.textContent = pcChoice;
+    winner.textContent = getWinner();
+    getPcScore.textContent = getScore()
+}))
 
 
 function getPcChoice() {
     let num = Math.floor((Math.random() * 3) + 1);
-    let pcAnswer;
+
     if (num == 1) {
-        console.log("rock")
-        pcAnswer = "rock"
+        pcChoice = "rock"
     } else if (num == 2) {
-        console.log("paper")
-        pcAnswer = "paper"
+        pcChoice = "paper"
     } else {
-        console.log("scissors")
-        pcAnswer = "scissors"
+        pcChoice = "scissors"
     }
-
-    document.getElementById("pcshow").innerHTML = pcAnswer;
 }
 
-function choiceRock() {
-    userChoice = "rock"
-    document.getElementById("usershow").innerHTML = userChoice
-}
-
-function choicePaper() {
-    userChoice = "paper"
-    document.getElementById("usershow").innerHTML = userChoice
-}
-
-function choiceScissors() {
-    userChoice = "scissors"
-    document.getElementById("usershow").innerHTML = userChoice
+function getWinner() {
+    if (userChoice == pcChoice) {
+        return "draw"
+    } else if (userChoice == "rock") {
+        return (pcChoice == "scissors") ? "You Win!" : "You lose";
+    } else if (userChoice == "paper") {
+        return (pcChoice == "rock") ? "You Win!" : "You lose";
+    } else if (userChoice == "scissors") {
+        return (pcChoice == "paper") ? "You Win!" : "You lose";
+    }
 }
 
 function getScore() {
-    let userScore = 0;
-    let pcScore = 0;
-
-    if (userChoice == "rock" || pcChoice == "scissors") {
-        console.log("winer")
+    if (userChoice == "rock" && pcChoice == "scissors") {
+        userChoice++;
     }
 }
-
-
-
